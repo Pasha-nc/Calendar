@@ -1,0 +1,87 @@
+﻿body {
+    font-size: 18px;
+}
+
+#divCalendarTable {
+    width: 60%;    
+    border: 1px solid grey;
+    border-collapse: collapse;
+    margin-left: 15px;
+    margin-top: 15px;        
+}
+
+#calendarTable {
+    border: 1px solid grey;
+    text-align: center;
+    width: 95%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    display: table;
+    margin: 15px auto 15px auto;
+}
+
+.calendarHeader {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 50px;
+    color: darkblue;
+}
+
+    .calendarHeader:hover {
+        background-color: #c6c6c6;
+    }
+
+.monthCell {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 60px;
+    color: darkblue;
+}
+
+    .monthCell:hover {
+        background-color: #c6c6c6;
+    }
+
+.calendarCellWeekdays {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 70px;
+    color: darkblue;
+}
+
+    .calendarCellWeekdays:hover {
+        background-color: #c6c6c6;
+    }
+
+.calendarCellHolydays {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 70px;
+    color: red;
+}
+
+    .calendarCellHolydays:hover {
+        background-color: #c6c6c6;
+    }
+
+.calendarHeadWeekdays {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 50px;
+    color: darkblue;
+}
+
+.calendarWeekdays:hover {
+    background-color: #c6c6c6;
+}
+
+.calendarHeadHolydays {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 50px;
+    color: red;
+}
+
+    .calendarHeadHolydays:hover {
+        background-color: #c6c6c6;
+    }
