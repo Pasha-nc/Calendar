@@ -30,7 +30,7 @@
             myDofW += @"<td class='calendarHead" + (r < 5 ? "Weekdays" : "Holydays") + "'>" + (MyDaysOfWeek)r + @"</td>";
         }
 
-        string monthRow = @"<tr><td class='monthCell'>Previous</td><td class='monthCell' colspan = '5' id='selectedMonthCell'></td><td class='monthCell'>Next</td></tr>";
+        string monthRow = @"<tr><td class='monthCell' id='prevMonth'>Previous</td><td class='monthCell' colspan = '5' id='selectedMonthCell'></td><td class='monthCell' id='nextMonth'>Next</td></tr>";
 
         string result = @"<table id='calendarTable'><thead><th class='calendarHeader' colspan = '7'>Calendar</th></thead><tr>" + monthRow + myDofW + @"</tr><tbody>" + n + @"</tbody></table>";
     }
@@ -39,49 +39,6 @@
 
 </div>
 
-<script>
-
-    const getCalendarData = function () {
-
-        let xhrM = new XMLHttpRequest(); // создаем объект, с помощью которого будем отправлять запрос
-
-        xhrM.open("GET", "/calendar/getcalendardata/?selectedMonth=" + document.getElementById('selectedMonthCell').innerHTML); // отправляем GET запрос
-
-        xhrM.onload = () => {   // после загрузки ответа Response
-
-            let response = JSON.parse(xhrM.response);
-
-            var j = 1;
-
-            for (var i = response.selectedMonthStartingDay; i < response.daysInMonth + response.selectedMonthStartingDay; i++) {
-
-                document.querySelector("#calendarCell" + i.toString()).innerHTML = j;
-
-                document.querySelector("#selectedMonthCell").innerHTML = response.selectedMonth.toString() +"."+ response.selectedYear.toString();
-
-                j++;
-            }
-        }
-        xhrM.send();
-    }
-
-</script>
-
-<script>
-
-    getCalendarData();
-
-</script>
-
-<script>
-
-    let cellM = document.querySelector("#selectedMonthCell");
-
-    cellM.addEventListener("click", () => {   // добавляем обработчик события нажатия
-
-        getCalendarData();
-
-    })
-</script>
+<script src="~/Scripts/JavaScript.js"></script>
 
 

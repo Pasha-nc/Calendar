@@ -14,18 +14,16 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult GetClick(string id)
+        [HttpPost]
+        public IActionResult ChangeMonth(string selectedMonth, int offset)
         {
-            return View();
+            return Json(CalendarDataProvider.Provide(selectedMonth,offset));
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetCalendarData(string selectedMonth)
         {
-            Console.WriteLine($"*** {selectedMonth}");
-
-            CalendarData calendarData = new();
-            return Json(calendarData);
+            return Json(CalendarDataProvider.Provide(selectedMonth));
         }
     }
 }

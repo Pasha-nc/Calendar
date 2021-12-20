@@ -12,10 +12,10 @@ namespace WebApplication1.Models
         public int SelectedYear { get; set; }
         public int SelectedMonthStartingDay { get; set; }
         public int DaysInMonth { get; set; }
-        public CalendarData()
+        public CalendarData(DateTime currentDateTime)
         {
 
-            DateTime currentDateTime = DateTime.Now;
+            //DateTime currentDateTime = DateTime.Now;
 
             DateTime firstDayOfCurrentMonth = new(currentDateTime.Year, currentDateTime.Month, 1);
 
@@ -25,9 +25,122 @@ namespace WebApplication1.Models
             SelectedMonth = currentDateTime.Month;
             SelectedYear = currentDateTime.Year;
 
-            SelectedMonthStartingDay = dayOfWeekOfFirstDayOfCurrentMonth == 0 ? 7 : dayOfWeekOfFirstDayOfCurrentMonth - 1;
+            SelectedMonthStartingDay = dayOfWeekOfFirstDayOfCurrentMonth == 0 ? 6 : dayOfWeekOfFirstDayOfCurrentMonth - 1;
 
             DaysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
+        }
+
+        public void ChangeMonth(int offset)
+        {
+            if (offset == 1 || offset == -1)
+            {
+                if (SelectedMonth + offset < 1)
+                {
+                    SelectedYear--;
+                    SelectedMonth = 12;
+                    offset = 0;
+                }
+                else if (SelectedMonth + offset > 12)
+                {
+                    SelectedYear++;
+                    SelectedMonth = 1;
+                    offset = 0;
+                }
+                else
+                {
+                    ;
+                }
+
+                DateTime currentDateTime = new(SelectedYear, SelectedMonth + offset, 1);
+
+                DateTime firstDayOfCurrentMonth = new(currentDateTime.Year, currentDateTime.Month, 1);
+
+                int dayOfWeekOfFirstDayOfCurrentMonth = ((int)firstDayOfCurrentMonth.DayOfWeek);
+
+                SelectedDay = currentDateTime.Day;
+                SelectedMonth = currentDateTime.Month;
+                SelectedYear = currentDateTime.Year;
+
+                SelectedMonthStartingDay = dayOfWeekOfFirstDayOfCurrentMonth;
+
+                DaysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
+            }
+        }
+    }
+
+    public static class CalendarDataProvider
+    {
+        public static CalendarData Provide(string selectedMonth, int offset)
+        {
+            string[] x = new string[2];
+
+            int month = 1, year = 1;
+
+            if (selectedMonth != null && selectedMonth != string.Empty)
+            {
+                x = selectedMonth.Split('.');
+
+                bool correctInput = int.TryParse(x[0], out month);
+
+                if (correctInput)
+                {
+                    correctInput = int.TryParse(x[1], out year);
+                }
+
+                if (!correctInput)
+                {
+                    year = DateTime.Now.Year;
+                    month = DateTime.Now.Month;
+                }
+
+                if (offset == 1 || offset == -1)
+                {
+                    if (month + offset < 1)
+                    {
+                        year--;
+                        month = 12;
+                        offset = 0;
+                    }
+                    else if (month + offset > 12)
+                    {
+                        year++;
+                        month = 1;
+                        offset = 0;
+                    }
+                    else
+                    {
+                        ;
+                    }
+                }
+            }
+
+            return new(selectedMonth == null ? DateTime.Now : new DateTime(year, month + offset, 1));
+        }
+        public static CalendarData Provide(string selectedMonth)
+        {
+            string[] x = new string[2];
+
+            int month = 1, year = 1;
+
+            if (selectedMonth != null)
+            {
+                x = selectedMonth.Split('.');
+
+                bool correctInput = int.TryParse(x[0], out month);
+
+                if (correctInput)
+                {
+                    correctInput = int.TryParse(x[1], out year);
+                }
+
+                if (!correctInput)
+                {
+                    year = DateTime.Now.Year;
+                    month = DateTime.Now.Month;
+                }
+            }
+
+            return new(selectedMonth == null ? DateTime.Now : new DateTime(year, month, 1));            
         }
     }
 }
