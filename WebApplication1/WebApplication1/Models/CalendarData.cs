@@ -70,77 +70,34 @@ namespace WebApplication1.Models
 
     public static class CalendarDataProvider
     {
-        public static CalendarData Provide(string selectedMonth, int offset)
+        public static CalendarData Provide(int year, int month, int offset)
         {
-            string[] x = new string[2];
-
-            int month = 1, year = 1;
-
-            if (selectedMonth != null && selectedMonth != string.Empty)
+            if (offset == 1 || offset == -1)
             {
-                x = selectedMonth.Split('.');
-
-                bool correctInput = int.TryParse(x[0], out month);
-
-                if (correctInput)
+                if (month + offset < 1)
                 {
-                    correctInput = int.TryParse(x[1], out year);
+                    year--;
+                    month = 12;
+                    offset = 0;
                 }
-
-                if (!correctInput)
+                else if (month + offset > 12)
                 {
-                    year = DateTime.Now.Year;
-                    month = DateTime.Now.Month;
+                    year++;
+                    month = 1;
+                    offset = 0;
                 }
-
-                if (offset == 1 || offset == -1)
+                else
                 {
-                    if (month + offset < 1)
-                    {
-                        year--;
-                        month = 12;
-                        offset = 0;
-                    }
-                    else if (month + offset > 12)
-                    {
-                        year++;
-                        month = 1;
-                        offset = 0;
-                    }
-                    else
-                    {
-                        ;
-                    }
+                    ;
                 }
             }
 
-            return new(selectedMonth == null ? DateTime.Now : new DateTime(year, month + offset, 1));
+            return new(new DateTime(year, month + offset, 1));
         }
-        public static CalendarData Provide(string selectedMonth)
+        public static CalendarData Provide(int year, int month)
         {
-            string[] x = new string[2];
-
-            int month = 1, year = 1;
-
-            if (selectedMonth != null)
-            {
-                x = selectedMonth.Split('.');
-
-                bool correctInput = int.TryParse(x[0], out month);
-
-                if (correctInput)
-                {
-                    correctInput = int.TryParse(x[1], out year);
-                }
-
-                if (!correctInput)
-                {
-                    year = DateTime.Now.Year;
-                    month = DateTime.Now.Month;
-                }
-            }
-
-            return new(selectedMonth == null ? DateTime.Now : new DateTime(year, month, 1));            
+            return new((year == DateTime.Now.Year && month == DateTime.Now.Month) ? 
+                                DateTime.Now : new DateTime(year, month, 1));
         }
     }
 }

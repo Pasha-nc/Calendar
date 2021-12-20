@@ -4,7 +4,7 @@
 
     const selMonth = document.getElementById('selectedMonthCell').innerHTML;
 
-    xhrM.open("POST", "/calendar/getcalendardata/?selectedMonth=" + selMonth); // отправляем GET запрос
+    xhrM.open("POST", "/calendar/getcalendardata/?selectedMonth=" + selMonth); // отправляем Post запрос
 
     xhrM.onload = () => {   // после загрузки ответа Response
 

@@ -17,13 +17,56 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult ChangeMonth(string selectedMonth, int offset)
         {
-            return Json(CalendarDataProvider.Provide(selectedMonth,offset));
+            string[] x = new string[2];
+
+            int month = DateTime.Now.Month, year = DateTime.Now.Year;
+
+            if (selectedMonth != null && selectedMonth != string.Empty)
+            {
+                x = selectedMonth.Split('.');
+
+                bool correctInput = int.TryParse(x[0], out month);
+
+                if (correctInput)
+                {
+                    correctInput = int.TryParse(x[1], out year);
+                }
+
+                if (!correctInput)
+                {
+                    year = DateTime.Now.Year;
+                    month = DateTime.Now.Month;
+                }
+            }
+                return Json(CalendarDataProvider.Provide(year, month, offset));
         }
 
         [HttpPost]
         public IActionResult GetCalendarData(string selectedMonth)
         {
-            return Json(CalendarDataProvider.Provide(selectedMonth));
+            string[] x = new string[2];
+
+            int month = DateTime.Now.Month, year = DateTime.Now.Year;
+
+            if (selectedMonth != null && selectedMonth != string.Empty)
+            {
+                x = selectedMonth.Split('.');
+
+                bool correctInput = int.TryParse(x[0], out month);
+
+                if (correctInput)
+                {
+                    correctInput = int.TryParse(x[1], out year);
+                }
+
+                if (!correctInput)
+                {
+                    year = DateTime.Now.Year;
+                    month = DateTime.Now.Month;
+                }
+            }
+
+            return Json(CalendarDataProvider.Provide(year, month));
         }
     }
 }
