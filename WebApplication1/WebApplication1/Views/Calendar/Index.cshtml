@@ -1,44 +1,62 @@
 ﻿@using WebApplication1.Models;
 
-<div id="divCalendarTable">
-    @{
-        const int rows = 6;
-        const int columns = 7;
+<div id="mainContainer">
+    <div id="divCalendarTable">
+        @{
+            const int rows = 6;
+            const int columns = 7;
 
-        string n = string.Empty;
+            string n = string.Empty;
 
-        string[] cellText = new string[rows * columns];
+            string[] cellText = new string[rows * columns];
 
-        for (int i = 0; i < rows; i++)
-        {
-            n += @"<tr class='" + (i % 2 == 0 ? "oddrow" : "evenrow") + @"'>";
-
-            for (int j = 0; j < columns; j++)
+            for (int i = 0; i < rows; i++)
             {
-                cellText[j + i * columns] = string.Empty;
+                n += @"<tr class='" + (i % 2 == 0 ? "oddrow" : "evenrow") + @"'>";
 
-                n += @"<td class='calendarCell" + (j < 5 ? "Weekdays" : "Holydays") + "' id='calendarCell" + (j + i * columns).ToString() + "'>" + cellText[j + i * columns] + @"</td>";
+                for (int j = 0; j < columns; j++)
+                {
+                    cellText[j + i * columns] = string.Empty;
+
+                    n += @"<td class='calendarCell" + (j < 5 ? "Weekdays" : "Holydays") + "' id='calendarCell" + (j + i * columns).ToString() + "'>" + cellText[j + i * columns] + @"</td>";
+                }
+
+                n += @"</tr>";
             }
 
-            n += @"</tr>";
+            string myDofW = "";
+
+            for (var r = 0; r < columns; r++)
+            {
+                myDofW += @"<td class='calendarHead" + (r < 5 ? "Weekdays" : "Holydays") + "'>" + (MyDaysOfWeek)r + @"</td>";
+            }
+
+            string monthRow = @"<tr><td class='monthCell' id='prevMonth'>Previous</td><td class='monthCell' colspan = '5' id='selectedMonthCell'></td><td class='monthCell' id='nextMonth'>Next</td></tr>";
+
+            string result = @"<table id='calendarTable'><thead><tr><th class='calendarHeader' colspan = '7'>Calendar</th></tr></thead><tr>" + monthRow + myDofW + @"</tr><tbody>" + n + @"</tbody></table>";
         }
 
-        string myDofW = "";
+        @Html.Raw(result)
 
-        for (var r = 0; r < columns; r++)
-        {
-            myDofW += @"<td class='calendarHead" + (r < 5 ? "Weekdays" : "Holydays") + "'>" + (MyDaysOfWeek)r + @"</td>";
-        }
+    </div>
 
-        string monthRow = @"<tr><td class='monthCell' id='prevMonth'>Previous</td><td class='monthCell' colspan = '5' id='selectedMonthCell'></td><td class='monthCell' id='nextMonth'>Next</td></tr>";
+    <script src="~/Scripts/FillCalendar.js"></script>
 
-        string result = @"<table id='calendarTable'><thead><th class='calendarHeader' colspan = '7'>Calendar</th></thead><tr>" + monthRow + myDofW + @"</tr><tbody>" + n + @"</tbody></table>";
-    }
+    <div id="divRecordsTable">
+        <table id="recordsTable">
+            <thead id="recordsHead">
+                <tr>
+                    <th class="recordsHeader" id="selDateHeader" colspan='7'>@DateTime.Now</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="recordsAddRow">
+                    <td class="recordsAddCell" colspan='7'>AddRecord</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    @Html.Raw(result)
+    <script src="~/Scripts/FillRecords.js"></script>
 
 </div>
-
-<script src="~/Scripts/JavaScript.js"></script>
-
-

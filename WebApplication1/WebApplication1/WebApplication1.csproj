@@ -24,7 +24,10 @@
     <Content Update="wwwroot\css\StyleSheet.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\Scripts\JavaScript.js">
+    <Content Update="wwwroot\Scripts\FillCalendar.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Scripts\FillRecords.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
