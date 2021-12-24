@@ -1,42 +1,52 @@
-﻿const addRecordRow = function (recId, recordText) {
+﻿const addRecordRow = function (recId, recTime, recordText) {
     const recordsAddRow = document.getElementById('recordsAddRow');
 
     const recRow = document.createElement("tr");
     recRow.setAttribute("id", "recordRow" + recId.toString());    
 
     const recCellId = document.createElement("td");
+    const recCellTime = document.createElement("td");
     const recCellRecord = document.createElement("td");
     const recCellStatus = document.createElement("td");
     const recCellDel = document.createElement("td");
 
     recCellId.setAttribute("class", "recordsCell");
+    recCellTime.setAttribute("class", "recordsCell");
     recCellRecord.setAttribute("class", "recordsCell");
     recCellStatus.setAttribute("class", "recordsCellStatus");
     recCellDel.setAttribute("class", "recordsCell");
 
     recCellId.setAttribute("id", "idCell" + recId.toString());
+    recCellTime.setAttribute("id", "idCell" + recId.toString());
     recCellRecord.setAttribute("id", "recordCell" + recId.toString());
     recCellStatus.setAttribute("id", "statusCell" + recId.toString());
     recCellDel.setAttribute("id", "delCell" + + recId.toString());
-
+    
     recCellRecord.setAttribute("colspan", "8");
     recCellStatus.setAttribute("colspan", "2");
 
+    recCellId.setAttribute("hidden", "true");
+
     recCellId.innerHTML = recId;
+    recCellTime.innerHTML = recTime;
     recCellRecord.innerHTML = recordText;
     recCellDel.innerHTML = "del";
    
     recordsAddRow.parentNode.insertBefore(recRow, recordsAddRow);
 
     recRow.append(recCellId);
+    recRow.append(recCellTime);
     recRow.append(recCellRecord);
     recRow.append(recCellStatus);
     recRow.append(recCellDel);
 }
 
-addRecordRow(0, "Record");
-addRecordRow(1, "Record");
-addRecordRow(2, "Record");
+
+var myDate = "17:15";
+
+addRecordRow(0, myDate, "Record");
+addRecordRow(1, myDate, "Record");
+addRecordRow(2, myDate, "Record");
 
 const delRecord = function (y) {
     console.log(document.getElementById("idCell" + y.toString()).innerHTML);    
