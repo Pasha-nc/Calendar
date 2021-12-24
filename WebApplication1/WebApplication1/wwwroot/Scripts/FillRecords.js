@@ -1,16 +1,42 @@
-﻿const addRecordRow = function (x) {
+﻿const addRecordRow = function (recId, recordText) {
     const recordsAddRow = document.getElementById('recordsAddRow');
 
-    let recRow = document.createElement("tr");
-    recRow.setAttribute("id", "recordRow" + x.toString());
-    recRow.innerHTML = "<td class='recordsCell' id='idCell" + x.toString() + "'>iD</td><td class='recordsCell' colspan='8' id='recordCell" + x.toString() + "'>Record</td><td class='recordsCellStatus' colspan = '2' id='statusCell" + x.toString() + "'>Status</td><td class='recordsCell' id='delRecCell" + x.toString() + "'>del</td>";
+    const recRow = document.createElement("tr");
+    recRow.setAttribute("id", "recordRow" + recId.toString());    
 
+    const recCellId = document.createElement("td");
+    const recCellRecord = document.createElement("td");
+    const recCellStatus = document.createElement("td");
+    const recCellDel = document.createElement("td");
+
+    recCellId.setAttribute("class", "recordsCell");
+    recCellRecord.setAttribute("class", "recordsCell");
+    recCellStatus.setAttribute("class", "recordsCellStatus");
+    recCellDel.setAttribute("class", "recordsCell");
+
+    recCellId.setAttribute("id", "idCell" + recId.toString());
+    recCellRecord.setAttribute("id", "recordCell" + recId.toString());
+    recCellStatus.setAttribute("id", "statusCell" + recId.toString());
+    recCellDel.setAttribute("id", "delCell" + + recId.toString());
+
+    recCellRecord.setAttribute("colspan", "8");
+    recCellStatus.setAttribute("colspan", "2");
+
+    recCellId.innerHTML = recId;
+    recCellRecord.innerHTML = recordText;
+    recCellDel.innerHTML = "del";
+   
     recordsAddRow.parentNode.insertBefore(recRow, recordsAddRow);
+
+    recRow.append(recCellId);
+    recRow.append(recCellRecord);
+    recRow.append(recCellStatus);
+    recRow.append(recCellDel);
 }
 
-addRecordRow(0);
-addRecordRow(1);
-addRecordRow(2);
+addRecordRow(0, "Record");
+addRecordRow(1, "Record");
+addRecordRow(2, "Record");
 
 const delRecord = function (y) {
     console.log(document.getElementById("idCell" + y.toString()).innerHTML);    
@@ -23,7 +49,23 @@ const addStatusList = function () {
 
     for (var i = 0; i < myCells.length; i++) {
         console.log(myCells.item(i));
-        myCells.item(i).innerHTML = "<select class='selectStatus'><option>Status1</option><option>Status2</option><option>Status3</option></select>";
+
+        const mySelectStatus = document.createElement("select");
+        mySelectStatus.setAttribute("class", "selectStatus");
+
+        const selOption1 = document.createElement("option");
+        const selOption2 = document.createElement("option");
+        const selOption3 = document.createElement("option");
+
+        selOption1.innerHTML = "Status1";
+        selOption2.innerHTML = "Status2";
+        selOption3.innerHTML = "Status3";
+
+        myCells.item(i).append(mySelectStatus);
+
+        mySelectStatus.append(selOption1);
+        mySelectStatus.append(selOption2);
+        mySelectStatus.append(selOption3);        
     }
 }
 

@@ -4,7 +4,7 @@
 
     const selMonth = document.getElementById('selectedMonthCell').innerHTML;
 
-    xhrM.open("POST", "/calendar/getcalendardata/?selectedMonth=" + selMonth); // отправляем Post запрос
+    xhrM.open("POST", "/calendar/getcalendardata/?selectedMonth=" + selMonth); // отправляем POST запрос
 
     xhrM.onload = () => {   // после загрузки ответа Response
 
@@ -36,7 +36,7 @@ const changeMonth = function (offset) {
 
     const selMonth = document.getElementById('selectedMonthCell').innerHTML;
 
-    xhrM.open("POST", "/calendar/changemonth/?selectedMonth=" + selMonth + "&offset=" + offset); // отправляем GET запрос
+    xhrM.open("POST", "/calendar/changemonth/?selectedMonth=" + selMonth + "&offset=" + offset); // отправляем POST запрос
 
     xhrM.onload = () => {   // после загрузки ответа Response
 
