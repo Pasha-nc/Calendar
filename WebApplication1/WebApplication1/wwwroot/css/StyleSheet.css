@@ -1,23 +1,24 @@
 ﻿body {
     font-size: 18px;
 }
+
 #mainContainer {
     width: 98%;
     border: 1px solid grey;
     border-collapse: collapse;
     margin-left: 15px;
-    margin-top: 15px;    
+    margin-top: 15px;
     float: left;
 }
 
 #divCalendarTable {
-    width: 60%;
+    width: 50%;
     border: 1px solid grey;
     border-collapse: collapse;
     margin-left: 15px;
     margin-top: 15px;
     float: left;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
 
 #calendarTable {
@@ -97,7 +98,7 @@
     }
 
 #divRecordsTable {
-    width: 37%;
+    width: 47%;
     border: 1px solid grey;
     border-collapse: collapse;
     margin-left: 15px;
@@ -138,6 +139,17 @@
         background-color: #c6c6c6;
     }
 
+.recordsCellStatus {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 60px;
+    color: darkblue;
+}
+
+    .recordsCellStatus:hover {
+        background-color: #c6c6c6;
+    }
+
 .recordsAddCell {
     border: 1px solid grey;
     border-collapse: collapse;
@@ -148,3 +160,7 @@
     .recordsAddCell:hover {
         background-color: #c6c6c6;
     }
+
+.selectStatus {
+    color: darkblue;
+}
