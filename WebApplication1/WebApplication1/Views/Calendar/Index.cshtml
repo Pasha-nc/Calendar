@@ -51,7 +51,13 @@
             </thead>
             <tbody>
                 <tr id="recordsAddRow">
-                    <td class="recordsAddCell" colspan='12'>AddRecord</td>
+                    <td class="recordsAddCell" colspan='12'>
+                        <form action="/" method="post">
+                            <input type="time" name="recTime" id="inputRecTime" />
+                            <input type="text" name="recText" id="inputRecText" />
+                            <input type="submit" name="submit" value="AddRec" id="inputRecSubmit" />
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>

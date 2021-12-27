@@ -153,14 +153,30 @@
 .recordsAddCell {
     border: 1px solid grey;
     border-collapse: collapse;
-    height: 60px;
+    height: 45px;
     color: darkblue;
 }
 
-    .recordsAddCell:hover {
-        background-color: #c6c6c6;
-    }
-
 .selectStatus {
     color: darkblue;
+}
+
+#inputRecTime {
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#inputRecText {    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 75%;
+}
+
+#inputRecSubmit {
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;    
 }

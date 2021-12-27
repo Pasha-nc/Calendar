@@ -2,7 +2,9 @@
     const recordsAddRow = document.getElementById('recordsAddRow');
 
     const recRow = document.createElement("tr");
-    recRow.setAttribute("id", "recordRow" + recId.toString());    
+    recRow.setAttribute("id", "recordRow" + recId.toString());
+
+    recRow.setAttribute("class", "recordRowClass");
 
     const recCellId = document.createElement("td");
     const recCellTime = document.createElement("td");
@@ -21,7 +23,7 @@
     recCellRecord.setAttribute("id", "recordCell" + recId.toString());
     recCellStatus.setAttribute("id", "statusCell" + recId.toString());
     recCellDel.setAttribute("id", "delCell" + + recId.toString());
-    
+
     recCellRecord.setAttribute("colspan", "8");
     recCellStatus.setAttribute("colspan", "2");
 
@@ -31,7 +33,7 @@
     recCellTime.innerHTML = recTime;
     recCellRecord.innerHTML = recordText;
     recCellDel.innerHTML = "del";
-   
+
     recordsAddRow.parentNode.insertBefore(recRow, recordsAddRow);
 
     recRow.append(recCellId);
@@ -49,7 +51,7 @@ addRecordRow(1, myDate, "Record");
 addRecordRow(2, myDate, "Record");
 
 const delRecord = function (y) {
-    console.log(document.getElementById("idCell" + y.toString()).innerHTML);    
+    console.log(document.getElementById("idCell" + y.toString()).innerHTML);
 }
 
 delRecord(1);
@@ -75,8 +77,17 @@ const addStatusList = function () {
 
         mySelectStatus.append(selOption1);
         mySelectStatus.append(selOption2);
-        mySelectStatus.append(selOption3);        
+        mySelectStatus.append(selOption3);
     }
 }
 
 addStatusList();
+
+const removeRecordRow = function () {
+    const recRows = document.getElementsByClassName("recordRowClass");
+    for (var i = recRows.length - 1; i >= 1; i--) {
+        recRows.item(i).remove();
+    }
+}
+
+//removeRecordRow();
