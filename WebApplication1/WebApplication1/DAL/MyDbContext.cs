@@ -12,6 +12,7 @@ namespace WebApplication1.DAL
     public class MyDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<MyRecord> Records { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server = (localdb)\MSSQLLocalDB; Database=CalendarDB; Trusted_Connection=True;");

@@ -9,10 +9,7 @@ namespace WebApplication1.Models
     {        
         public Guid Id { get; set; }
         public string Login { get; set; }
-    }
-
-    public enum MyDaysOfWeek
-    { 
-        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+        public string PassHash { get; set; }
+        public List<MyRecord> Records { get; set; }
     }
 }

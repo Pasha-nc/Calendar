@@ -11,6 +11,11 @@
     float: left;
 }
 
+input {
+    color: darkblue;
+    font-size: 16px;
+}
+
 #divCalendarTable {
     width: 50%;
     border: 1px solid grey;
@@ -165,18 +170,20 @@
     margin-left: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
+    color: darkblue;
 }
 
-#inputRecText {    
+#inputRecText {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 75%;
+    width: 70%;
+    color: darkblue;
 }
 
 #inputRecSubmit {
     margin-right: 5px;
     margin-top: 5px;
-    margin-bottom: 5px;    
+    margin-bottom: 5px;
 }

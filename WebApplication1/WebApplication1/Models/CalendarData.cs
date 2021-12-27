@@ -100,4 +100,9 @@ namespace WebApplication1.Models
                                 DateTime.Now : new DateTime(year, month, 1));
         }
     }
+
+    public enum MyDaysOfWeek
+    {
+        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    }
 }
