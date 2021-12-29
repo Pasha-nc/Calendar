@@ -9,19 +9,32 @@ using WebApplication1.Models;
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
-    {
+    {        
+        private UnitOfWork unitOfWork;
+        public HomeController()
+        {
+             unitOfWork = new UnitOfWork();
+        }
         public IActionResult Index()
         {
-            //using MyDbContext my = new();
+            User myUser = new() { Id = Guid.NewGuid(), Login = "user1", PassHash = "pass", Records = new() };
 
-            //User myUser1 = new() { Id = Guid.NewGuid(), Login = "Login1" };
-            //User myUser2 = new() { Id = Guid.NewGuid(), Login = "Login2" };
+            unitOfWork.UserRepo.Insert(myUser);
+            
 
-            //my.Users.AddRange(myUser1, myUser2);
+            MyRecord myRecord = new(myUser, DateTime.Now, "firstRecord");
 
-            //my.SaveChanges();
+            unitOfWork.RecordRepo.Insert(myRecord);
+
+            unitOfWork.Save();
 
             return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

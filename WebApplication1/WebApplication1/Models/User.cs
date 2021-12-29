@@ -10,6 +10,6 @@ namespace WebApplication1.Models
         public Guid Id { get; set; }
         public string Login { get; set; }
         public string PassHash { get; set; }
-        public List<MyRecord> Records { get; set; }
+        public List<MyRecord> Records { get; set; }       
     }
 }
