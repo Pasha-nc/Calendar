@@ -22,11 +22,13 @@ namespace WebApplication1.Controllers
             unitOfWork.UserRepo.Insert(myUser);
             
 
-            MyRecord myRecord = new(myUser, DateTime.Now, "firstRecord");
+            MyRecord myRecord1 = new(myUser, DateTime.Now, "firstRecord");
+            MyRecord myRecord2 = new(myUser, DateTime.Now, "secondRecord");
 
-            unitOfWork.RecordRepo.Insert(myRecord);
+            //unitOfWork.RecordRepo.Insert(myRecord1);
+            //unitOfWork.RecordRepo.Insert(myRecord2);
 
-            unitOfWork.Save();
+            //unitOfWork.Save();
 
             return View();
         }

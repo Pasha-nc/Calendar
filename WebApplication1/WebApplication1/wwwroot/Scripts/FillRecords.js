@@ -43,24 +43,10 @@
     recRow.append(recCellDel);
 }
 
-
-var myDate = "17:15";
-
-addRecordRow(0, myDate, "Record");
-addRecordRow(1, myDate, "Record");
-addRecordRow(2, myDate, "Record");
-
-const delRecord = function (y) {
-    console.log(document.getElementById("idCell" + y.toString()).innerHTML);
-}
-
-delRecord(1);
-
 const addStatusList = function () {
     const myCells = document.getElementsByClassName('recordsCellStatus');
 
     for (var i = 0; i < myCells.length; i++) {
-        console.log(myCells.item(i));
 
         const mySelectStatus = document.createElement("select");
         mySelectStatus.setAttribute("class", "selectStatus");
@@ -81,7 +67,40 @@ const addStatusList = function () {
     }
 }
 
-addStatusList();
+const getUserRecords = function () {
+    let xhrR = new XMLHttpRequest();
+
+    xhrR.open("POST", "/calendar/getuserrecords/?year=" + 2021 + "&month=" + 12 + "&day=" + 18);
+
+    xhrR.onload = () => {   // после загрузки ответа Response
+
+        let response = JSON.parse(xhrR.response);
+
+        console.log(response);
+
+        for (var i = 0; i < response.length; i++) {
+            addRecordRow(response[i].id, response[i].myDateTime.toString().substring(11, 16), response[i].text);
+        }
+
+        addStatusList();
+    }
+
+    xhrR.send();
+}
+
+getUserRecords();
+
+//var myDate = "17:15";
+
+//addRecordRow(0, myDate, "Record");
+//addRecordRow(1, myDate, "Record");
+//addRecordRow(2, myDate, "Record");
+
+const delRecord = function (y) {
+    console.log(document.getElementById("idCell" + y.toString()).innerHTML);
+}
+
+//delRecord(1);
 
 const removeRecordRow = function () {
     const recRows = document.getElementsByClassName("recordRowClass");

@@ -4,11 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
+using WebApplication1.DAL;
 
 namespace WebApplication1.Controllers
 {
     public class CalendarController : Controller
     {
+        UnitOfWork unitOfWork;
+        public CalendarController()
+        {
+            unitOfWork = new();
+        }
         public IActionResult Index()
         {
             return View();
@@ -39,6 +45,14 @@ namespace WebApplication1.Controllers
                 }
             }
                 return Json(CalendarDataProvider.Provide(year, month, offset));
+        }
+
+
+        [HttpPost]
+        public IActionResult GetUserRecords(int year, int month, int day)
+        {
+            var records = unitOfWork.RecordRepo.Get();
+            return Json(records);
         }
 
         [HttpPost]
