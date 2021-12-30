@@ -12,15 +12,22 @@ namespace WebApplication1.Models
         public string Text { get; set; }
         public User MyUser { get; set; }
 
-        public MyRecord(User myUser, DateTime myDateTime, string text)
+        public RecordStatus Status { get; set; }
+
+        public MyRecord(User myUser, DateTime myDateTime, string text, RecordStatus status)
         {
             MyUser = myUser;
             MyDateTime = myDateTime;
             Text = text;
+            Status = status;
         }
 
         public MyRecord()
         {
         }
+    }
+    public enum RecordStatus 
+    {
+        ToStart, InProgress, Done
     }
 }

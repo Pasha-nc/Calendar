@@ -55,15 +55,32 @@ const addStatusList = function () {
         const selOption2 = document.createElement("option");
         const selOption3 = document.createElement("option");
 
-        selOption1.innerHTML = "Status1";
-        selOption2.innerHTML = "Status2";
-        selOption3.innerHTML = "Status3";
+        selOption1.innerHTML = "ToStart";
+        selOption2.innerHTML = "InProgress";
+        selOption3.innerHTML = "Done";
+
+        selOption1.setAttribute("id", "statusOptionToStart" + i.toString());
+        selOption2.setAttribute("id", "statusOptionInProgress" + i.toString());
+        selOption3.setAttribute("id", "statusOptionDone" + i.toString());
 
         myCells.item(i).append(mySelectStatus);
 
         mySelectStatus.append(selOption1);
         mySelectStatus.append(selOption2);
         mySelectStatus.append(selOption3);
+    }
+}
+
+const setStatusList = function (recNum, recStatus) {
+    const myCells = document.getElementsByClassName('recordsCellStatus');
+
+    for (var i = 0; i < myCells.length; i++) {
+        const selOpt = document.getElementById("statusOption" + recStatus + i.toString());
+
+        if (i == recNum) {
+            selOpt.setAttribute("selected", "true");
+
+        }
     }
 }
 
@@ -83,6 +100,12 @@ const getUserRecords = function () {
         }
 
         addStatusList();
+
+        for (var i = 0; i < response.length; i++) {
+
+            setStatusList(i, response[i].status);
+        }
+
     }
 
     xhrR.send();

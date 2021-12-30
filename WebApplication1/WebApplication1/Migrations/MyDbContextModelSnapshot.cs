@@ -32,6 +32,9 @@ namespace WebApplication1.Migrations
                     b.Property<Guid?>("MyUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 

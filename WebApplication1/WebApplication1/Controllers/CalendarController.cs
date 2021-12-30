@@ -44,14 +44,14 @@ namespace WebApplication1.Controllers
                     month = DateTime.Now.Month;
                 }
             }
-                return Json(CalendarDataProvider.Provide(year, month, offset));
+            return Json(CalendarDataProvider.Provide(year, month, offset));
         }
 
 
         [HttpPost]
         public IActionResult GetUserRecords(int year, int month, int day)
         {
-            var records = unitOfWork.RecordRepo.Get();
+            var records = unitOfWork.RecordRepo.Get().Select(r => new { id = r.Id, myDateTime = r.MyDateTime, text = r.Text, status = r.Status.ToString()});
             return Json(records);
         }
 

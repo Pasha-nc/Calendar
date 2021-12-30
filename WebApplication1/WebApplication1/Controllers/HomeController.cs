@@ -22,11 +22,13 @@ namespace WebApplication1.Controllers
             unitOfWork.UserRepo.Insert(myUser);
             
 
-            MyRecord myRecord1 = new(myUser, DateTime.Now, "firstRecord");
-            MyRecord myRecord2 = new(myUser, DateTime.Now, "secondRecord");
+            MyRecord myRecord1 = new(myUser, DateTime.Now, "firstRecord",RecordStatus.ToStart);
+            MyRecord myRecord2 = new(myUser, DateTime.Now, "secondRecord",RecordStatus.InProgress);
+            MyRecord myRecord3 = new(myUser, DateTime.Now, "thirdRecord", RecordStatus.Done);
 
             //unitOfWork.RecordRepo.Insert(myRecord1);
             //unitOfWork.RecordRepo.Insert(myRecord2);
+            //unitOfWork.RecordRepo.Insert(myRecord3);
 
             //unitOfWork.Save();
 
