@@ -26,6 +26,10 @@ namespace WebApplication1.Controllers
             MyRecord myRecord2 = new(myUser, DateTime.Now, "secondRecord",RecordStatus.InProgress);
             MyRecord myRecord3 = new(myUser, DateTime.Now, "thirdRecord", RecordStatus.Done);
 
+            myRecord1.Description = "firstDescription";
+            myRecord2.Description = "secondDescription";
+            myRecord3.Description = "thirdDescription";
+
             //unitOfWork.RecordRepo.Insert(myRecord1);
             //unitOfWork.RecordRepo.Insert(myRecord2);
             //unitOfWork.RecordRepo.Insert(myRecord3);

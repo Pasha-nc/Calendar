@@ -65,6 +65,28 @@
 
     <script src="~/Scripts/FillRecords.js"></script>
 
+    <div id="editRecDiv">
+        <table id="editRecTable">
+            <tr>
+                <td class ="editRecordsCell" id ="editTimeCell" colspan="2">Time</td>
+                <td class ="editRecordsCell" id="editTitleCell" colspan="8">Name</td>
+                <td class ="editRecordsCell" id ="editStatusCell" colspan="2">
+                    <select>
+                        <option id ="editToStart" value="ToStart">ToStart</option>
+                        <option id="editInProgress" value="InProgress">InProgress</option>
+                        <option id="editDone" value="Done">Done</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class ="editRecordsCell" id="editDescCell" colspan="12">Description</td>
+            </tr>
+            <tr>
+                <td class ="editRecordsCell" colspan="12">Save</td>
+            </tr>
+        </table>
+    </div>
+
 </div>
 
 

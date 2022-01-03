@@ -16,8 +16,12 @@ input {
     font-size: 16px;
 }
 
+select {
+    color: darkblue;   
+}
+
 #divCalendarTable {
-    width: 50%;
+    width: 48%;
     border: 1px solid grey;
     border-collapse: collapse;
     margin-left: 15px;
@@ -102,13 +106,35 @@ input {
         background-color: #c6c6c6;
     }
 
+#editRecDiv {
+    width: 47%;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-right: 15px;
+    float: right;
+    margin-bottom: 15px;
+}
+
+#editRecTable {
+    border: 1px solid grey;
+    text-align: center;
+    width: 95%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    display: table;
+    margin: 15px auto 15px auto;
+}
+
 #divRecordsTable {
     width: 47%;
     border: 1px solid grey;
     border-collapse: collapse;
     margin-left: 15px;
     margin-top: 15px;
-    float: left;
+    margin-right: 15px;
+    float: right;
     margin-bottom: 15px;
 }
 
@@ -141,6 +167,17 @@ input {
 }
 
     .recordsCell:hover {
+        background-color: #c6c6c6;
+    }
+
+.recordsCellTitle {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 60px;
+    color: darkblue;
+}
+
+    .recordsCellTitle:hover {
         background-color: #c6c6c6;
     }
 
@@ -186,4 +223,18 @@ input {
     margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.editRecordsCell {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 60px;
+    color: darkblue;
+}
+
+#editRecordDescCell {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 180px;
+    color: darkblue;
 }

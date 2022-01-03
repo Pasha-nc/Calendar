@@ -9,16 +9,17 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
         public DateTime MyDateTime { get; set; }
-        public string Text { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public User MyUser { get; set; }
 
         public RecordStatus Status { get; set; }
 
-        public MyRecord(User myUser, DateTime myDateTime, string text, RecordStatus status)
+        public MyRecord(User myUser, DateTime myDateTime, string title, RecordStatus status)
         {
             MyUser = myUser;
             MyDateTime = myDateTime;
-            Text = text;
+            Title = title;
             Status = status;
         }
 

@@ -51,8 +51,23 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult GetUserRecords(int year, int month, int day)
         {
-            var records = unitOfWork.RecordRepo.Get().Select(r => new { id = r.Id, myDateTime = r.MyDateTime, text = r.Text, status = r.Status.ToString()});
+            var records = unitOfWork.RecordRepo.Get().OrderBy(r=>r.MyDateTime).Select(r => new { id = r.Id, myDateTime = r.MyDateTime, title = r.Title, status = r.Status.ToString()});
             return Json(records);
+        }
+
+        [HttpPost]
+        public IActionResult GetDescr(string mydate, string recId)
+        {
+            bool correctInput = int.TryParse(recId, out int id);
+            MyRecord record = null;
+
+            if (correctInput)
+            {
+                record = unitOfWork.RecordRepo.Get(id);
+            }
+            
+
+            return Json(new { id = record.Id, myDateTime = record.MyDateTime, title = record.Title, status = record.Status.ToString(), description = record.Description });
         }
 
         [HttpPost]

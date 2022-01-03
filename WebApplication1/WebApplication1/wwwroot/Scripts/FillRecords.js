@@ -14,12 +14,12 @@
 
     recCellId.setAttribute("class", "recordsCell");
     recCellTime.setAttribute("class", "recordsCell");
-    recCellRecord.setAttribute("class", "recordsCell");
+    recCellRecord.setAttribute("class", "recordsCellTitle");
     recCellStatus.setAttribute("class", "recordsCellStatus");
     recCellDel.setAttribute("class", "recordsCell");
 
     recCellId.setAttribute("id", "idCell" + recId.toString());
-    recCellTime.setAttribute("id", "idCell" + recId.toString());
+    recCellTime.setAttribute("id", "timeCell" + recId.toString());
     recCellRecord.setAttribute("id", "recordCell" + recId.toString());
     recCellStatus.setAttribute("id", "statusCell" + recId.toString());
     recCellDel.setAttribute("id", "delCell" + + recId.toString());
@@ -84,6 +84,36 @@ const setStatusList = function (recNum, recStatus) {
     }
 }
 
+const addRecordsClickEvent = function () {
+    const titleCells = document.getElementsByClassName("recordsCellTitle");
+
+    console.log(titleCells.length);
+
+    for (var i = 0; i < titleCells.length; i++) {
+        const myId = titleCells.item(i).getAttribute("id").substring(10); //recordCell
+
+        let getDescr = new XMLHttpRequest();
+
+        titleCells.item(i).addEventListener("click", () => {
+
+            getDescr.open("POST", "/calendar/getdescr?mydate=" + "05.05.2021" + "&recId=" + myId.toString()); 
+            getDescr.onload = () => {   
+                let response = JSON.parse(getDescr.response);  
+                
+                document.querySelector("#editTimeCell").innerHTML = response.myDateTime.toString().substring(11, 16);
+                document.querySelector("#editTitleCell").innerHTML = response.title;
+                document.querySelector("#editDescCell").innerHTML = response.description;
+
+                document.querySelector("#edit" + response.status).setAttribute("selected", "true");
+            }
+            getDescr.send();
+
+        });
+    }
+}
+
+
+
 const getUserRecords = function () {
     let xhrR = new XMLHttpRequest();
 
@@ -93,10 +123,10 @@ const getUserRecords = function () {
 
         let response = JSON.parse(xhrR.response);
 
-        console.log(response);
+        //console.log(response);
 
         for (var i = 0; i < response.length; i++) {
-            addRecordRow(response[i].id, response[i].myDateTime.toString().substring(11, 16), response[i].text);
+            addRecordRow(response[i].id, response[i].myDateTime.toString().substring(11, 16), response[i].title);
         }
 
         addStatusList();
@@ -106,12 +136,16 @@ const getUserRecords = function () {
             setStatusList(i, response[i].status);
         }
 
+        addRecordsClickEvent();
+
     }
 
     xhrR.send();
 }
 
 getUserRecords();
+
+
 
 //var myDate = "17:15";
 
@@ -133,3 +167,5 @@ const removeRecordRow = function () {
 }
 
 //removeRecordRow();
+
+
