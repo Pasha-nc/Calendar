@@ -104,6 +104,10 @@ const addRecordsClickEvent = function () {
                 document.querySelector("#editTitleCell").innerHTML = response.title;
                 document.querySelector("#editDescCell").innerHTML = response.description;
 
+                document.querySelector("#editToStart").removeAttribute("selected");
+                document.querySelector("#editInProgress").removeAttribute("selected");
+                document.querySelector("#editDone").removeAttribute("selected");
+
                 document.querySelector("#edit" + response.status).setAttribute("selected", "true");
             }
             getDescr.send();
