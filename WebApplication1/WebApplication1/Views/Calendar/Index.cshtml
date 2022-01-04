@@ -46,7 +46,10 @@
         <table id="recordsTable">
             <thead id="recordsHead">
                 <tr>
-                    <th class="recordsHeader" id="selDateHeader" colspan='12'>@DateTime.Now</th>
+                    @{ 
+                        string shortDate = DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + DateTime.Now.Year.ToString();
+                    }
+                    <th class="recordsHeader" id="selDateHeader" colspan='12'>@shortDate</th>
                 </tr>
             </thead>
             <tbody>

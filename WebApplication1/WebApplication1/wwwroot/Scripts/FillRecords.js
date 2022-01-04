@@ -71,6 +71,7 @@ const addStatusList = function () {
     }
 }
 
+
 const setStatusList = function (recNum, recStatus) {
     const myCells = document.getElementsByClassName('recordsCellStatus');
 
@@ -85,9 +86,7 @@ const setStatusList = function (recNum, recStatus) {
 }
 
 const addRecordsClickEvent = function () {
-    const titleCells = document.getElementsByClassName("recordsCellTitle");
-
-    console.log(titleCells.length);
+    const titleCells = document.getElementsByClassName("recordsCellTitle");    
 
     for (var i = 0; i < titleCells.length; i++) {
         const myId = titleCells.item(i).getAttribute("id").substring(10); //recordCell
@@ -96,10 +95,10 @@ const addRecordsClickEvent = function () {
 
         titleCells.item(i).addEventListener("click", () => {
 
-            getDescr.open("POST", "/calendar/getdescr?mydate=" + "05.05.2021" + "&recId=" + myId.toString()); 
-            getDescr.onload = () => {   
-                let response = JSON.parse(getDescr.response);  
-                
+            getDescr.open("POST", "/calendar/getdescr?mydate=" + "05.05.2021" + "&recId=" + myId.toString());
+            getDescr.onload = () => {
+                let response = JSON.parse(getDescr.response);
+
                 document.querySelector("#editTimeCell").innerHTML = response.myDateTime.toString().substring(11, 16);
                 document.querySelector("#editTitleCell").innerHTML = response.title;
                 document.querySelector("#editDescCell").innerHTML = response.description;
@@ -121,7 +120,9 @@ const addRecordsClickEvent = function () {
 const getUserRecords = function () {
     let xhrR = new XMLHttpRequest();
 
-    xhrR.open("POST", "/calendar/getuserrecords/?year=" + 2021 + "&month=" + 12 + "&day=" + 18);
+    
+
+    xhrR.open("POST", "/calendar/getuserrecords/?selDate=" + document.getElementById("selDateHeader").innerHTML);
 
     xhrR.onload = () => {   // после загрузки ответа Response
 
@@ -165,7 +166,8 @@ const delRecord = function (y) {
 
 const removeRecordRow = function () {
     const recRows = document.getElementsByClassName("recordRowClass");
-    for (var i = recRows.length - 1; i >= 1; i--) {
+
+    for (var i = recRows.length - 1; i >= 0; i--) {
         recRows.item(i).remove();
     }
 }

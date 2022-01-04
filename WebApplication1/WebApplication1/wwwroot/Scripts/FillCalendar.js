@@ -1,4 +1,33 @@
-﻿const getCalendarData = function () {
+﻿const addDateClickEvent = function () {
+    const dateCellsW = document.getElementsByClassName("calendarCellWeekdays");
+    const dateCellsH = document.getElementsByClassName("calendarCellHolydays");    
+
+    for (var i = 0; i < dateCellsW.length; i++) {        
+
+        if (dateCellsW.item(i).innerHTML != "") {            
+            const fullDateW = dateCellsW.item(i).innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
+
+            dateCellsW.item(i).addEventListener("click", () => {
+                document.getElementById("selDateHeader").innerHTML = fullDateW;
+                removeRecordRow(); getUserRecords();
+            });
+        }
+    }    
+
+    for (var j = 0; j < dateCellsH.length; j++) {
+
+        if (dateCellsH.item(j).innerHTML != "") {
+            const fullDateH = dateCellsH.item(j).innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
+
+            dateCellsH.item(j).addEventListener("click", () => {
+                document.getElementById("selDateHeader").innerHTML = fullDateH;
+                removeRecordRow(); getUserRecords();
+            });
+        }
+    }
+}
+
+const getCalendarData = function () {
 
     let xhrM = new XMLHttpRequest(); // создаем объект, с помощью которого будем отправлять запрос
 
@@ -24,6 +53,8 @@
 
             j++;
         }
+
+        addDateClickEvent();
     }
     xhrM.send();
 }
@@ -63,7 +94,7 @@ const changeMonth = function (offset) {
 
             document.querySelector("#selectedMonthCell").innerHTML = response.selectedMonth.toString() + "." + response.selectedYear.toString();
 
-
+            addDateClickEvent();
         }
     }
     xhrM.send();
@@ -72,3 +103,4 @@ const changeMonth = function (offset) {
 document.getElementById('prevMonth').addEventListener("click", () => { changeMonth(-1) });
 
 document.getElementById('nextMonth').addEventListener("click", () => { changeMonth(1) });
+
