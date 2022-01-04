@@ -95,7 +95,9 @@ const addRecordsClickEvent = function () {
 
         titleCells.item(i).addEventListener("click", () => {
 
-            getDescr.open("POST", "/calendar/getdescr?mydate=" + "05.05.2021" + "&recId=" + myId.toString());
+            var selDateH = document.getElementById("selDateHeader").innerHTML;
+
+            getDescr.open("POST", "/calendar/getdescr?mydate=" + selDateH + "&recId=" + myId.toString());
             getDescr.onload = () => {
                 let response = JSON.parse(getDescr.response);
 
@@ -119,16 +121,11 @@ const addRecordsClickEvent = function () {
 
 const getUserRecords = function () {
     let xhrR = new XMLHttpRequest();
-
     
-
     xhrR.open("POST", "/calendar/getuserrecords/?selDate=" + document.getElementById("selDateHeader").innerHTML);
 
     xhrR.onload = () => {   // после загрузки ответа Response
-
         let response = JSON.parse(xhrR.response);
-
-        //console.log(response);
 
         for (var i = 0; i < response.length; i++) {
             addRecordRow(response[i].id, response[i].myDateTime.toString().substring(11, 16), response[i].title);
@@ -142,15 +139,11 @@ const getUserRecords = function () {
         }
 
         addRecordsClickEvent();
-
     }
-
     xhrR.send();
 }
 
 getUserRecords();
-
-
 
 //var myDate = "17:15";
 

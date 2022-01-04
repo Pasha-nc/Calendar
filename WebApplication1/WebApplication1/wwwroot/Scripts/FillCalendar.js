@@ -1,31 +1,32 @@
 ﻿const addDateClickEvent = function () {
     const dateCellsW = document.getElementsByClassName("calendarCellWeekdays");
-    const dateCellsH = document.getElementsByClassName("calendarCellHolydays");    
+    const dateCellsH = document.getElementsByClassName("calendarCellHolydays");
 
-    for (var i = 0; i < dateCellsW.length; i++) {        
+    for (var i = 0; i < dateCellsW.length; i++) {
 
-        if (dateCellsW.item(i).innerHTML != "") {            
-            const fullDateW = dateCellsW.item(i).innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
+        dateCellsW.item(i).addEventListener("click", (x) => {
 
-            dateCellsW.item(i).addEventListener("click", () => {
-                document.getElementById("selDateHeader").innerHTML = fullDateW;
+            if (x.srcElement.innerHTML != "") {
+                document.getElementById("selDateHeader").innerHTML = x.srcElement.innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
                 removeRecordRow(); getUserRecords();
-            });
-        }
-    }    
+            }
+        });
+
+    }
 
     for (var j = 0; j < dateCellsH.length; j++) {
 
-        if (dateCellsH.item(j).innerHTML != "") {
-            const fullDateH = dateCellsH.item(j).innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
+        dateCellsH.item(j).addEventListener("click", (y) => {
 
-            dateCellsH.item(j).addEventListener("click", () => {
-                document.getElementById("selDateHeader").innerHTML = fullDateH;
+            if (y.srcElement.innerHTML != "") {
+                document.getElementById("selDateHeader").innerHTML = y.srcElement.innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
                 removeRecordRow(); getUserRecords();
-            });
-        }
+            }
+        });
+
     }
 }
+
 
 const getCalendarData = function () {
 
@@ -93,8 +94,6 @@ const changeMonth = function (offset) {
 
 
             document.querySelector("#selectedMonthCell").innerHTML = response.selectedMonth.toString() + "." + response.selectedYear.toString();
-
-            addDateClickEvent();
         }
     }
     xhrM.send();
