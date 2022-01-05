@@ -1,10 +1,10 @@
 ﻿const addDateClickEvent = function () {
-    const dateCellsW = document.getElementsByClassName("calendarCellWeekdays");
-    const dateCellsH = document.getElementsByClassName("calendarCellHolydays");
 
-    for (var i = 0; i < dateCellsW.length; i++) {
+    const dateCells = document.querySelectorAll(".calendarCellWeekdays, .calendarCellHolydays");
 
-        dateCellsW.item(i).addEventListener("click", (x) => {
+    for (var i = 0; i < dateCells.length; i++) {
+
+        dateCells.item(i).addEventListener("click", (x) => {
 
             if (x.srcElement.innerHTML != "") {
                 document.getElementById("selDateHeader").innerHTML = x.srcElement.innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
@@ -12,19 +12,7 @@
             }
         });
 
-    }
-
-    for (var j = 0; j < dateCellsH.length; j++) {
-
-        dateCellsH.item(j).addEventListener("click", (y) => {
-
-            if (y.srcElement.innerHTML != "") {
-                document.getElementById("selDateHeader").innerHTML = y.srcElement.innerHTML + "." + document.getElementById("selectedMonthCell").innerHTML;
-                removeRecordRow(); getUserRecords();
-            }
-        });
-
-    }
+    }    
 }
 
 

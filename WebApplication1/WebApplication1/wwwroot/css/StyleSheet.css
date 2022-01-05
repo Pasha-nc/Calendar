@@ -238,3 +238,7 @@ select {
     height: 180px;
     color: darkblue;
 }
+
+#editIdCell {
+    display: none;
+}

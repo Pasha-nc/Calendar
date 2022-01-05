@@ -101,6 +101,9 @@ const addRecordsClickEvent = function () {
             getDescr.onload = () => {
                 let response = JSON.parse(getDescr.response);
 
+                document.querySelector("#editIdCell").innerHTML = response.id;
+                document.querySelector("#editDateCell").innerHTML = selDateH;
+
                 document.querySelector("#editTimeCell").innerHTML = response.myDateTime.toString().substring(11, 16);
                 document.querySelector("#editTitleCell").innerHTML = response.title;
                 document.querySelector("#editDescCell").innerHTML = response.description;
