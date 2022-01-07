@@ -26,13 +26,19 @@ namespace WebApplication1.Controllers
             MyRecord myRecord2 = new(myUser, DateTime.Now, "secondRecord",RecordStatus.InProgress);
             MyRecord myRecord3 = new(myUser, DateTime.Now, "thirdRecord", RecordStatus.Done);
 
+            MyRecord myRecord4 = new(myUser, new(2022, 1, 2), "someRecord", RecordStatus.InProgress);
+
             myRecord1.Description = "firstDescription";
             myRecord2.Description = "secondDescription";
             myRecord3.Description = "thirdDescription";
 
+            myRecord4.Description = "someDescription";
+
             //unitOfWork.RecordRepo.Insert(myRecord1);
             //unitOfWork.RecordRepo.Insert(myRecord2);
             //unitOfWork.RecordRepo.Insert(myRecord3);
+
+            //unitOfWork.RecordRepo.Insert(myRecord4);
 
             //unitOfWork.Save();
 

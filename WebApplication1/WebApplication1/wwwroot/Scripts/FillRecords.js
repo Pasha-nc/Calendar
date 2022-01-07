@@ -128,20 +128,24 @@ const getUserRecords = function () {
     xhrR.open("POST", "/calendar/getuserrecords/?selDate=" + document.getElementById("selDateHeader").innerHTML);
 
     xhrR.onload = () => {   // после загрузки ответа Response
-        let response = JSON.parse(xhrR.response);
 
-        for (var i = 0; i < response.length; i++) {
-            addRecordRow(response[i].id, response[i].myDateTime.toString().substring(11, 16), response[i].title);
-        }
+        if (xhrR.response != "null") {
 
-        addStatusList();
+            let response = JSON.parse(xhrR.response);
 
-        for (var i = 0; i < response.length; i++) {
+            for (var i = 0; i < response.length; i++) {
+                addRecordRow(response[i].id, response[i].myDateTime.toString().substring(11, 16), response[i].title);
+            }
 
-            setStatusList(i, response[i].status);
-        }
+            addStatusList();
 
-        addRecordsClickEvent();
+            for (var i = 0; i < response.length; i++) {
+
+                setStatusList(i, response[i].status);
+            }
+
+            addRecordsClickEvent();
+        }        
     }
     xhrR.send();
 }

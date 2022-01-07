@@ -78,9 +78,48 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult GetUserRecords(string selDate)
         {
-            var records = unitOfWork.RecordRepo.Get().OrderBy(r => r.MyDateTime)
-                            .Select(r => new { id = r.Id, myDateTime = r.MyDateTime, 
-                                               title = r.Title, status = r.Status.ToString() });
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            int day = DateTime.Now.Day;
+
+            var myDateArray = selDate.Split('.');
+
+            bool correctInput = int.TryParse(myDateArray[0], out day);
+
+            if (correctInput)
+            {
+                correctInput = int.TryParse(myDateArray[1], out month);
+            }
+
+            if (correctInput)
+            {
+                correctInput = int.TryParse(myDateArray[2], out year);
+            }
+
+            DateTime myDate = DateTime.Now;
+
+            if (correctInput)
+            {
+                try
+                {
+                    myDate = new(year, month, day);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                    correctInput = false;
+                }
+            }
+
+            var records = correctInput ? unitOfWork.RecordRepo.Get(r => r.MyDateTime.Date == myDate).OrderBy(r => r.MyDateTime)
+                            .Select(r => new
+                            {
+                                id = r.Id,
+                                myDateTime = r.MyDateTime,
+                                title = r.Title,
+                                status = r.Status.ToString()
+                            }) : null;
+
             return Json(records);
         }
 
@@ -95,9 +134,14 @@ namespace WebApplication1.Controllers
                 record = unitOfWork.RecordRepo.Get(id);
             }
 
-            return Json(new { id = record.Id, myDateTime = record.MyDateTime, 
-                              title = record.Title, status = record.Status.ToString(), 
-                              description = record.Description });
+            return Json(new
+            {
+                id = record.Id,
+                myDateTime = record.MyDateTime,
+                title = record.Title,
+                status = record.Status.ToString(),
+                description = record.Description
+            });
         }
     }
 }
