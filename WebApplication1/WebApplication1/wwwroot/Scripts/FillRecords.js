@@ -16,7 +16,7 @@
     recCellTime.setAttribute("class", "recordsCell");
     recCellRecord.setAttribute("class", "recordsCellTitle");
     recCellStatus.setAttribute("class", "recordsCellStatus");
-    recCellDel.setAttribute("class", "recordsCell");
+    recCellDel.setAttribute("class", "recordsCellDel");
 
     recCellId.setAttribute("id", "idCell" + recId.toString());
     recCellTime.setAttribute("id", "timeCell" + recId.toString());
@@ -95,7 +95,7 @@ const addRecordsClickEvent = function () {
 
         titleCells.item(i).addEventListener("click", () => {
 
-            var selDateH = document.getElementById("selDateHeader").innerHTML;
+            let selDateH = document.getElementById("selDateHeader").innerHTML;
 
             getDescr.open("GET", "/calendar/getdescr?mydate=" + selDateH + "&recId=" + myId.toString());
             getDescr.onload = () => {
@@ -145,6 +145,8 @@ const getUserRecords = function () {
             }
 
             addRecordsClickEvent();
+
+            addDelClickEvent();
         }        
     }
     xhrR.send();

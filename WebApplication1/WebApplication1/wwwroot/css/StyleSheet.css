@@ -181,6 +181,17 @@ select {
         background-color: #c6c6c6;
     }
 
+.recordsCellDel {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 60px;
+    color: darkblue;
+}
+
+    .recordsCellDel:hover {
+        background-color: #c6c6c6;
+    }
+
 .recordsCellStatus {
     border: 1px solid grey;
     border-collapse: collapse;

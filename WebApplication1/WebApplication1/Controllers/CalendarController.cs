@@ -20,6 +20,16 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [HttpDelete]
+        public IActionResult DelRec(int recId)
+        {
+            unitOfWork.RecordRepo.Delete(recId);
+
+            unitOfWork.Save();
+
+            return Ok();
+        }
+
         [HttpPost]
         public IActionResult AddRec(string myDate, string title, int status)
         {
