@@ -21,6 +21,34 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        public IActionResult AddRec(string myDate, string title, int status)
+        {
+            bool correctInput = DateTime.TryParse(myDate, out DateTime myDateTime);
+
+            User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
+
+            MyRecord myRecord = null;
+
+            if (correctInput)
+            {
+                myRecord = new(myUser, myDateTime, title, (RecordStatus)status);
+            }
+            else 
+            {
+                return BadRequest();
+            }
+
+            if (myRecord != null)
+            {
+                unitOfWork.RecordRepo.Insert(myRecord);
+
+                unitOfWork.Save();                
+            }            
+
+            return Ok();
+        }
+
+        [HttpGet]
         public IActionResult ChangeMonth(string selectedMonth, int offset)
         {
             string[] x = new string[2];
@@ -47,7 +75,7 @@ namespace WebApplication1.Controllers
             return Json(CalendarDataProvider.Provide(year, month, offset));
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetCalendarData(string selectedMonth)
         {
             string[] x = new string[2];
@@ -75,7 +103,7 @@ namespace WebApplication1.Controllers
             return Json(CalendarDataProvider.Provide(year, month));
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetUserRecords(string selDate)
         {
             int year = DateTime.Now.Year;
@@ -123,7 +151,7 @@ namespace WebApplication1.Controllers
             return Json(records);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetDescr(string mydate, string recId)
         {
             bool correctInput = int.TryParse(recId, out int id);
