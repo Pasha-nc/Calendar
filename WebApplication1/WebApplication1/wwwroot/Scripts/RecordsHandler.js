@@ -1,7 +1,7 @@
 ﻿const addNewRecord = function (myDate, title, status) {
     let xhrA = new XMLHttpRequest();
 
-    const body = JSON.stringify({ MyDate: myDate, Title: title, Status: status });
+    const body = JSON.stringify({ MyDateTime: myDate, Title: title, Status: status });
 
     xhrA.open("POST", '/api/records', true);
     
@@ -22,12 +22,19 @@
         
     xhrA.send(body);    
 }
+//2022-01-11T11:04:17+00:00
 
 document.getElementById("inputRecSubmit").addEventListener("click", () => {
-    myDay = document.getElementById("selDateHeader").innerHTML;
-    myTime = document.getElementById("inputRecTime").value;
-    myTitle = document.getElementById("inputRecText").value;
-    addNewRecord(myDay.toString() + " " + myTime.toString(), myTitle, "0");
+    const dateArr = document.getElementById("selDateHeader").innerHTML.split(".");
+
+    const myDay = dateArr[2].toString() + "-" + (dateArr[1] < 10 ? "0" + dateArr[1] : dateArr[1]).toString() + "-" + (dateArr[0] < 10 ? "0" + dateArr[0] : dateArr[0]).toString();
+
+    const myTime = document.getElementById("inputRecTime").value;
+    const myTitle = document.getElementById("inputRecText").value;
+
+    const myDate = myDay.toString() + "T" + myTime.toString() + ":00+00:00";
+
+    addNewRecord(myDate, myTitle, 0);
 });
 
 const addDelClickEvent = function () {

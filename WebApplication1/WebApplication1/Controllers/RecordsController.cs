@@ -93,23 +93,40 @@ namespace WebApplication1.Controllers
         }
 
         // POST api/<RecordsController>
-        [HttpPost]
-        public IActionResult Post(CreateRecordBindingModel inputData)
-        {            
-            bool correctInput = DateTime.TryParse(inputData.MyDate, out DateTime myDateTime);
+        //[HttpPost]
+        //public IActionResult Post([FromBody] CreateRecordBindingModel inputData)
+        //{            
+        //    bool correctInput = DateTime.TryParse(inputData.MyDate, out DateTime myDateTime);
 
+        //    User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
+
+        //    MyRecord myRecord = null;
+
+        //    if (correctInput)
+        //    {
+        //        myRecord = new(myUser, myDateTime, inputData.Title, (RecordStatus)inputData.Status);
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    if (myRecord != null)
+        //    {
+        //        unitOfWork.RecordRepo.Insert(myRecord);
+
+        //        unitOfWork.Save();
+        //    }
+
+        //    return Ok();
+        //}
+
+        [HttpPost]
+        public IActionResult Post(MyRecord myRecord)
+        {
             User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
 
-            MyRecord myRecord = null;
-
-            if (correctInput)
-            {
-                myRecord = new(myUser, myDateTime, inputData.Title, (RecordStatus)inputData.Status);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            myRecord.MyUser = myUser;
 
             if (myRecord != null)
             {
@@ -123,7 +140,7 @@ namespace WebApplication1.Controllers
 
         // PUT api/<RecordsController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] MyRecord myRecord)
         {
             return Ok();
         }
