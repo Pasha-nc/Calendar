@@ -42,9 +42,8 @@ const addDelClickEvent = function () {
 
         delCells.item(i).addEventListener("click", () => {
             
-
-            //delRec.open("DELETE", "/calendar/delRec?recId=" + myId.toString());
             delRec.open("DELETE", "/api/records/" + myId.toString());
+
             delRec.onload = () => {
                 if (delRec.status == 200) {
                     removeRecordRow();
