@@ -22,8 +22,8 @@
         
     xhrA.send(body);    
 }
-//2022-01-11T11:04:17+00:00
 
+//2022-01-11T11:04:17+00:00
 document.getElementById("inputRecSubmit").addEventListener("click", () => {
     const dateArr = document.getElementById("selDateHeader").innerHTML.split(".");
 

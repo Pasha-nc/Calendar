@@ -90,39 +90,10 @@ namespace WebApplication1.Controllers
                 status = record.Status.ToString(),
                 description = record.Description
             });
-        }
-
-        // POST api/<RecordsController>
-        //[HttpPost]
-        //public IActionResult Post([FromBody] CreateRecordBindingModel inputData)
-        //{            
-        //    bool correctInput = DateTime.TryParse(inputData.MyDate, out DateTime myDateTime);
-
-        //    User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
-
-        //    MyRecord myRecord = null;
-
-        //    if (correctInput)
-        //    {
-        //        myRecord = new(myUser, myDateTime, inputData.Title, (RecordStatus)inputData.Status);
-        //    }
-        //    else
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    if (myRecord != null)
-        //    {
-        //        unitOfWork.RecordRepo.Insert(myRecord);
-
-        //        unitOfWork.Save();
-        //    }
-
-        //    return Ok();
-        //}
+        }        
 
         [HttpPost]
-        public IActionResult Post(MyRecord myRecord)
+        public IActionResult Post([FromBody] MyRecord myRecord)
         {
             User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
 
@@ -142,6 +113,16 @@ namespace WebApplication1.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] MyRecord myRecord)
         {
+            User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
+
+            myRecord.MyUser = myUser;
+
+            var dbRecord = unitOfWork.RecordRepo.Get(id);
+
+            dbRecord = myRecord;
+
+            unitOfWork.Save();
+
             return Ok();
         }
 
