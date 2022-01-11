@@ -1,11 +1,11 @@
 ﻿const addNewRecord = function (myDate, title, status) {
     let xhrA = new XMLHttpRequest();
 
-    const body = 'myDate=' + encodeURIComponent(myDate) +
-        '&title=' + encodeURIComponent(title) + '&status=' + encodeURIComponent(status);
+    const body = JSON.stringify({ MyDate: myDate, Title: title, Status: status });
 
-    xhrA.open("POST", '/calendar/addrec', true);
-    xhrA.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhrA.open("POST", '/api/records', true);
+    
+    xhrA.setRequestHeader('Content-Type', 'application/json');
 
     xhrA.onload = () => {
         if (xhrA.status == 200) {            
@@ -43,7 +43,8 @@ const addDelClickEvent = function () {
         delCells.item(i).addEventListener("click", () => {
             
 
-            delRec.open("DELETE", "/calendar/delRec?recId=" + myId.toString());
+            //delRec.open("DELETE", "/calendar/delRec?recId=" + myId.toString());
+            delRec.open("DELETE", "/api/records/" + myId.toString());
             delRec.onload = () => {
                 if (delRec.status == 200) {
                     removeRecordRow();

@@ -97,7 +97,8 @@ const addRecordsClickEvent = function () {
 
             let selDateH = document.getElementById("selDateHeader").innerHTML;
 
-            getDescr.open("GET", "/calendar/getdescr?mydate=" + selDateH + "&recId=" + myId.toString());
+            //getDescr.open("GET", "/calendar/getdescr?mydate=" + selDateH + "&recId=" + myId.toString());
+            getDescr.open("GET", "/api/records/" + myId.toString() + "/?mydate=" + selDateH);
             getDescr.onload = () => {
                 let response = JSON.parse(getDescr.response);
 
@@ -125,7 +126,8 @@ const addRecordsClickEvent = function () {
 const getUserRecords = function () {
     let xhrR = new XMLHttpRequest();
     
-    xhrR.open("GET", "/calendar/getuserrecords/?selDate=" + document.getElementById("selDateHeader").innerHTML);
+    //xhrR.open("GET", "/calendar/getuserrecords/?selDate=" + document.getElementById("selDateHeader").innerHTML);
+    xhrR.open("GET", "/api/records/?selDate=" + document.getElementById("selDateHeader").innerHTML);
 
     xhrR.onload = () => {   // после загрузки ответа Response
 
