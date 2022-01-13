@@ -74,6 +74,5 @@ namespace WebApplication1.Controllers
 
             return Json(CalendarDataProvider.Provide(year, month));
         }
-
     }
 }

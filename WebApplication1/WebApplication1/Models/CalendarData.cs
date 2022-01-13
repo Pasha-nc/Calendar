@@ -14,9 +14,6 @@ namespace WebApplication1.Models
         public int DaysInMonth { get; set; }
         public CalendarData(DateTime currentDateTime)
         {
-
-            //DateTime currentDateTime = DateTime.Now;
-
             DateTime firstDayOfCurrentMonth = new(currentDateTime.Year, currentDateTime.Month, 1);
 
             int dayOfWeekOfFirstDayOfCurrentMonth = ((int)firstDayOfCurrentMonth.DayOfWeek);
@@ -28,44 +25,7 @@ namespace WebApplication1.Models
             SelectedMonthStartingDay = dayOfWeekOfFirstDayOfCurrentMonth == 0 ? 6 : dayOfWeekOfFirstDayOfCurrentMonth - 1;
 
             DaysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
-        }
-
-        public void ChangeMonth(int offset)
-        {
-            if (offset == 1 || offset == -1)
-            {
-                if (SelectedMonth + offset < 1)
-                {
-                    SelectedYear--;
-                    SelectedMonth = 12;
-                    offset = 0;
-                }
-                else if (SelectedMonth + offset > 12)
-                {
-                    SelectedYear++;
-                    SelectedMonth = 1;
-                    offset = 0;
-                }
-                else
-                {
-                    ;
-                }
-
-                DateTime currentDateTime = new(SelectedYear, SelectedMonth + offset, 1);
-
-                DateTime firstDayOfCurrentMonth = new(currentDateTime.Year, currentDateTime.Month, 1);
-
-                int dayOfWeekOfFirstDayOfCurrentMonth = ((int)firstDayOfCurrentMonth.DayOfWeek);
-
-                SelectedDay = currentDateTime.Day;
-                SelectedMonth = currentDateTime.Month;
-                SelectedYear = currentDateTime.Year;
-
-                SelectedMonthStartingDay = dayOfWeekOfFirstDayOfCurrentMonth;
-
-                DaysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
-            }
-        }
+        }        
     }
 
     public static class CalendarDataProvider

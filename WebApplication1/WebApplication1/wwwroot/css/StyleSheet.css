@@ -253,3 +253,21 @@ select {
 #editIdCell {
     display: none;
 }
+
+input[name = "editTitleInput"] {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 95%;
+    color: darkblue;
+}
+
+textarea[name = "editDescInput"] {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 95%;
+    color: darkblue;
+}

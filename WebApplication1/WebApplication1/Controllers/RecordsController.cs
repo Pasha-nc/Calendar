@@ -18,7 +18,7 @@ namespace WebApplication1.Controllers
         {
             unitOfWork = new();
         }
-        
+
         // GET: api/<RecordsController>
         [HttpGet]
         [Produces("application/json")]
@@ -90,7 +90,7 @@ namespace WebApplication1.Controllers
                 status = record.Status.ToString(),
                 description = record.Description
             });
-        }        
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] MyRecord myRecord)
@@ -112,14 +112,12 @@ namespace WebApplication1.Controllers
         // PUT api/<RecordsController>/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] MyRecord myRecord)
-        {
+        {            
             User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
 
             myRecord.MyUser = myUser;
 
-            var dbRecord = unitOfWork.RecordRepo.Get(id);
-
-            dbRecord = myRecord;
+            unitOfWork.RecordRepo.Update(myRecord);
 
             unitOfWork.Save();
 

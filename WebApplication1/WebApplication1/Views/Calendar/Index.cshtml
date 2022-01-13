@@ -46,7 +46,7 @@
         <table id="recordsTable">
             <thead id="recordsHead">
                 <tr>
-                    @{ 
+                    @{
                         string shortDate = DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + DateTime.Now.Year.ToString();
                     }
                     <th class="recordsHeader" id="selDateHeader" colspan='12'>@shortDate</th>
@@ -68,33 +68,41 @@
 
     <script src="~/Scripts/FillRecords.js?v=@DateTime.Now"></script>
 
-    <script src ="~/Scripts/RecordsHandler.js?v=@DateTime.Now"></script>
-
     <div id="editRecDiv">
         <table id="editRecTable">
             <tr>
                 <td class="editRecordsCell" id="editIdCell"></td>
-                <td class="editRecordsCell" id="editDateCell" colspan="12">Date</td>
+                <td class="editRecordsCell" id="editDateCell" colspan="12">
+                    @shortDate
+                </td>
             </tr>
-            <tr>                
-                <td class ="editRecordsCell" id ="editTimeCell" colspan="2">Time</td>
-                <td class ="editRecordsCell" id="editTitleCell" colspan="8">Name</td>
-                <td class ="editRecordsCell" id ="editStatusCell" colspan="2">
-                    <select>
-                        <option id ="editToStart" value="ToStart">ToStart</option>
+            <tr>
+                <td class="editRecordsCell" id="editTimeCell" colspan="2">
+                    <input type="time" name="editTimeInput" value="" />
+                </td>
+                <td class="editRecordsCell" id="editTitleCell" colspan="8">
+                    <input type="text" name="editTitleInput" value="Title" />
+                </td>
+                <td class="editRecordsCell" id="editStatusCell" colspan="2">
+                    <select id="editStatusInput">
+                        <option id="editToStart" value="ToStart">ToStart</option>
                         <option id="editInProgress" value="InProgress">InProgress</option>
                         <option id="editDone" value="Done">Done</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td class ="editRecordsCell" id="editDescCell" colspan="12">Description</td>
+                <td class="editRecordsCell" id="editDescCell" colspan="12">
+                    <textarea name="editDescInput" cols="40" rows="5">Description</textarea>
+                </td>
             </tr>
             <tr>
-                <td class ="editRecordsCell" colspan="12">Save</td>
+                <td class="editRecordsCell" id="editSaveCell" colspan="12">Save</td>
             </tr>
         </table>
     </div>
+
+    <script src="~/Scripts/RecordsHandler.js?v=@DateTime.Now"></script>
 
 </div>
 

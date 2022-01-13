@@ -15,7 +15,6 @@
     }    
 }
 
-
 const getCalendarData = function () {
 
     let xhrM = new XMLHttpRequest(); // создаем объект, с помощью которого будем отправлять запрос
@@ -90,4 +89,3 @@ const changeMonth = function (offset) {
 document.getElementById('prevMonth').addEventListener("click", () => { changeMonth(-1) });
 
 document.getElementById('nextMonth').addEventListener("click", () => { changeMonth(1) });
-

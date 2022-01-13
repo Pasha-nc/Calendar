@@ -23,6 +23,8 @@ namespace WebApplication1.DAL
         void Delete(object id);
         void Delete(TEntity entityToDelete);
         void Delete(Expression<Func<TEntity, bool>> predicate);
+
+        void Update(TEntity entity);
     }
 
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -74,7 +76,7 @@ namespace WebApplication1.DAL
 
         public virtual void Insert(TEntity entity)
         {
-            dbSet.Add(entity);            
+            dbSet.Add(entity);
         }
 
         public virtual void Delete(object id)
@@ -98,8 +100,15 @@ namespace WebApplication1.DAL
         public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {
             if (predicate != null) dbSet.RemoveRange(dbSet.Where(predicate));
-            else dbSet.RemoveRange(dbSet);            
+            else dbSet.RemoveRange(dbSet);
         }
-       
+
+        public virtual void Update(TEntity entity)
+        {
+            //dbSet.Attach(entity);
+            //var entry = dbContext.Entry(entity);
+            var entry = dbSet.Attach(entity);
+            entry.State = EntityState.Modified;
+        }
     }
 }

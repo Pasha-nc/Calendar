@@ -71,7 +71,6 @@ const addStatusList = function () {
     }
 }
 
-
 const setStatusList = function (recNum, recStatus) {
     const myCells = document.getElementsByClassName('recordsCellStatus');
 
@@ -104,9 +103,9 @@ const addRecordsClickEvent = function () {
                 document.querySelector("#editIdCell").innerHTML = response.id;
                 document.querySelector("#editDateCell").innerHTML = selDateH;
 
-                document.querySelector("#editTimeCell").innerHTML = response.myDateTime.toString().substring(11, 16);
-                document.querySelector("#editTitleCell").innerHTML = response.title;
-                document.querySelector("#editDescCell").innerHTML = response.description;
+                document.querySelector('input[name = "editTimeInput"]').value = response.myDateTime.toString().substring(11, 16);
+                document.querySelector('input[name = "editTitleInput"]').value = response.title;
+                document.querySelector('textarea[name = "editDescInput"]').value = response.description;
 
                 document.querySelector("#editToStart").removeAttribute("selected");
                 document.querySelector("#editInProgress").removeAttribute("selected");
@@ -119,8 +118,6 @@ const addRecordsClickEvent = function () {
         });
     }
 }
-
-
 
 const getUserRecords = function () {
     let xhrR = new XMLHttpRequest();
@@ -154,18 +151,6 @@ const getUserRecords = function () {
 
 getUserRecords();
 
-//var myDate = "17:15";
-
-//addRecordRow(0, myDate, "Record");
-//addRecordRow(1, myDate, "Record");
-//addRecordRow(2, myDate, "Record");
-
-const delRecord = function (y) {
-    console.log(document.getElementById("idCell" + y.toString()).innerHTML);
-}
-
-//delRecord(1);
-
 const removeRecordRow = function () {
     const recRows = document.getElementsByClassName("recordRowClass");
 
@@ -173,7 +158,3 @@ const removeRecordRow = function () {
         recRows.item(i).remove();
     }
 }
-
-//removeRecordRow();
-
-
