@@ -20,10 +20,11 @@ namespace WebApplication1
         {
             services.AddControllersWithViews();
             services.AddSingleton<INotifier, ConsoleNotifier>();
+            services.AddHostedService<NotifierHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, INotifier myNotifier)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -33,8 +34,6 @@ namespace WebApplication1
             app.UseRouting();
 
             app.UseStaticFiles();
-
-            myNotifier.UseNotifier();
 
             app.UseEndpoints(endpoints =>
             {
