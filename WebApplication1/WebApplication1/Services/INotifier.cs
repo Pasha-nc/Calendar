@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,9 @@ namespace WebApplication1.Services
         IEnumerable<MyRecord> GetRecordsToNotify()
         {
             MyDbContext db = new();
-            //TODO Optimize query
-            return db.Records.AsEnumerable().Where(r => (r.MyDateTime - DateTime.Now).TotalSeconds < 60
-                                                               && (r.MyDateTime - DateTime.Now).TotalSeconds > 0);
+            
+            return db.Records.Where(r => EF.Functions.DateDiffSecond(DateTime.Now, r.MyDateTime) < 60
+                                                               && EF.Functions.DateDiffSecond(DateTime.Now, r.MyDateTime) > 0);
         }
 
         public void Notify()
