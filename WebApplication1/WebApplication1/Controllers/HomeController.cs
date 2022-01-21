@@ -11,17 +11,13 @@ using WebApplication1.Services;
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
-    {        
-        private UnitOfWork unitOfWork;
-        public HomeController()
-        {
-             unitOfWork = new UnitOfWork();
-        }
+    {
+        MyDbContext db = new();
         public IActionResult Index()
         {
             User myUser = new() { Id = Guid.NewGuid(), Login = "user1", PassHash = "pass", Records = new() };
 
-            unitOfWork.UserRepo.Insert(myUser);
+            db.Users.Add(myUser);
             
 
             MyRecord myRecord1 = new(myUser, DateTime.Now, "firstRecord",RecordStatus.ToStart);
@@ -36,21 +32,15 @@ namespace WebApplication1.Controllers
 
             myRecord4.Description = "someDescription";
 
-            //unitOfWork.RecordRepo.Insert(myRecord1);
-            //unitOfWork.RecordRepo.Insert(myRecord2);
-            //unitOfWork.RecordRepo.Insert(myRecord3);
+            //db.Records.Add(myRecord1);
+            //db.Records.Add(myRecord2);
+            //db.Records.Add(myRecord3);
 
-            //unitOfWork.RecordRepo.Insert(myRecord4);
+            //db.Records.Add(myRecord4);
 
-            //unitOfWork.Save();
+            //db.SaveChanges();
 
             return View();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            unitOfWork.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

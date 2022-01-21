@@ -18,9 +18,9 @@ namespace WebApplication1.Services
     {
         IEnumerable<MyRecord> GetRecordsToNotify()
         {
-            UnitOfWork unitOfWork = new();
+            MyDbContext db = new();
             //TODO Optimize query
-            return unitOfWork.RecordRepo.Get().Where(r => (r.MyDateTime - DateTime.Now).TotalSeconds < 60
+            return db.Records.AsEnumerable().Where(r => (r.MyDateTime - DateTime.Now).TotalSeconds < 60
                                                                && (r.MyDateTime - DateTime.Now).TotalSeconds > 0);
         }
 

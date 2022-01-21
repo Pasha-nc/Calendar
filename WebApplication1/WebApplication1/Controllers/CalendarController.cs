@@ -9,12 +9,7 @@ using WebApplication1.DAL;
 namespace WebApplication1.Controllers
 {
     public class CalendarController : Controller
-    {
-        UnitOfWork unitOfWork;
-        public CalendarController()
-        {
-            unitOfWork = new();
-        }
+    {        
         public IActionResult Index()
         {
             return View();

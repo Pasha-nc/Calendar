@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,7 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class RecordsController : ControllerBase
     {
-        UnitOfWork unitOfWork;
-        public RecordsController()
-        {
-            unitOfWork = new();
-        }
+        MyDbContext db = new();
 
         // GET: api/<RecordsController>
         [HttpGet]
@@ -57,7 +54,7 @@ namespace WebApplication1.Controllers
                 }
             }
 
-            var records = correctInput ? unitOfWork.RecordRepo.Get(r => r.MyDateTime.Date == myDate).OrderBy(r => r.MyDateTime)
+            var records = correctInput ? db.Records.Where(r => r.MyDateTime.Date == myDate).OrderBy(r => r.MyDateTime)
                             .Select(r => new
                             {
                                 id = r.Id,
@@ -79,7 +76,7 @@ namespace WebApplication1.Controllers
 
             if (correctInput)
             {
-                record = unitOfWork.RecordRepo.Get(id);
+                record = db.Records.Where(r => r.Id == id).FirstOrDefault();
             }
 
             return new JsonResult(new
@@ -95,15 +92,15 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] MyRecord myRecord)
         {
-            User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
+            User myUser = db.Users.FirstOrDefault();
 
             myRecord.MyUser = myUser;
 
             if (myRecord != null)
             {
-                unitOfWork.RecordRepo.Insert(myRecord);
+                db.Records.Add(myRecord);
 
-                unitOfWork.Save();
+                db.SaveChanges();
             }
 
             return Ok();
@@ -112,14 +109,16 @@ namespace WebApplication1.Controllers
         // PUT api/<RecordsController>/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] MyRecord myRecord)
-        {            
-            User myUser = unitOfWork.UserRepo.Get().FirstOrDefault();
+        {
+            User myUser = db.Users.FirstOrDefault();
 
             myRecord.MyUser = myUser;
 
-            unitOfWork.RecordRepo.Update(myRecord);
+            db.Records.Attach(myRecord);
 
-            unitOfWork.Save();
+            db.Entry(myRecord).State = EntityState.Modified;
+
+            db.SaveChanges();
 
             return Ok();
         }
@@ -128,9 +127,11 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            unitOfWork.RecordRepo.Delete(id);
+            var dbRecord = db.Records.Where(r => r.Id == id).FirstOrDefault();
 
-            unitOfWork.Save();
+            db.Records.Remove(dbRecord);
+
+            db.SaveChanges();
 
             return Ok();
         }
